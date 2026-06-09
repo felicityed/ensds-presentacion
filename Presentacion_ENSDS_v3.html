@@ -347,7 +347,8 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
   <!-- 6 · MAPA TEATRO ESTRATÉGICO (mapa real · general -> estrecho) -->
   <section class="slide map" data-blk="El teatro estratégico" data-lmap="strait">
     <div class="lmap" id="map-strait"></div>
-    <div class="mappanel bl step" data-step="1">
+    <style>#s6panel{visibility:hidden}#s6panel.in{visibility:visible}</style>
+    <div class="mappanel bl step" id="s6panel" data-step="1">
       <div class="kicker step" data-step="1">El teatro estratégico</div>
       <div class="idea step d1" data-step="1" style="font-size:clamp(28px,3.4vw,54px)">La amenaza sobre la soberanía<br>española en el <span class="hl">flanco sur.</span></div>
     </div>
@@ -357,11 +358,25 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
   <section class="slide map" data-blk="II · Canarias · la ZEE" data-lmap="canarias">
     <div class="lmap" id="map-canarias"></div>
     <span class="stepper" data-step="1" style="display:none"></span>
-    <div class="mappanel right" style="top:clamp(26px,4vh,52px);transform:none">
-      <div class="kicker step">Bloque II · El Atlántico</div>
-      <div class="idea step d1" style="font-size:clamp(28px,3.4vw,54px)">Nueva amenaza:<br>las <span class="cy">Canarias.</span></div>
-      <div class="lead step d1" style="margin-left:auto;color:var(--cyan)">Marruecos disputa la ZEE atlántica.</div>
-      <div class="quote step d2" style="margin-left:auto;font-size:clamp(20px,2.3vw,38px);margin-top:18px;color:#fff">Una ZEE <span class="red">secuestrada</span><br>a 100 km de casa.</div>
+    <style>
+      #s7panel{position:absolute;left:clamp(18px,2.6vw,42px);right:clamp(18px,2.6vw,42px);top:clamp(14px,2.2vh,28px);bottom:auto;transform:none;max-width:none;width:auto;text-align:left;
+        display:flex;align-items:center;justify-content:space-between;gap:clamp(18px,3.5vw,70px);padding:clamp(12px,1.4vw,22px) clamp(18px,2.2vw,38px)}
+      #s7panel .kicker{margin-bottom:4px}
+      #s7panel .idea{font-size:clamp(20px,2.4vw,38px);line-height:1.04;margin:0}
+      #s7panel .c7-right{text-align:right;flex-shrink:0}
+      #s7panel .lead{font-size:clamp(15px,1.4vw,22px);margin:0}
+      #s7panel .quote{font-size:clamp(17px,1.7vw,28px);margin-top:6px;color:#fff}
+      @media (max-width:760px){#s7panel{flex-direction:column;align-items:flex-start;text-align:left}#s7panel .c7-right{text-align:left}}
+    </style>
+    <div class="mappanel" id="s7panel">
+      <div class="c7-left">
+        <div class="kicker step">Bloque II · El Atlántico</div>
+        <div class="idea step d1">Nueva amenaza: las <span class="cy">Canarias.</span></div>
+      </div>
+      <div class="c7-right">
+        <div class="lead step d1" style="color:var(--cyan)">Marruecos disputa la ZEE atlántica.</div>
+        <div class="quote step d2">Una ZEE <span class="red">secuestrada</span> a 100 km de casa.</div>
+      </div>
     </div>
   </section>
 
@@ -441,7 +456,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
       <style>
         #s12grid{grid-template-columns:repeat(5,1fr);gap:clamp(12px,1.2vw,20px)}
         #s12grid .card{padding:clamp(16px,1.5vw,24px);min-height:clamp(170px,22vh,240px)}
-        #s12grid .card h4{font-size:clamp(15px,1.35vw,21px);line-height:1.18;text-wrap:balance}
+        #s12grid .card h4{font-size:clamp(14px,1.25vw,20px);line-height:1.18;text-wrap:balance;overflow-wrap:normal;word-break:keep-all;hyphens:none}
         #s12grid .card .cn{font-size:clamp(13px,1.15vw,17px)}
       </style>
       <div class="grid" id="s12grid">
