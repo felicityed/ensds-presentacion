@@ -606,19 +606,19 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
     function newmap(el){var m=L.map(el,{zoomControl:false,attributionControl:true,dragging:false,scrollWheelZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,touchZoom:false,zoomSnap:.1});
       L.tileLayer(TILE,{subdomains:'abcd',maxZoom:18,attribution:ATTR}).addTo(m);return m;}
     var B={
-      strait:function(el){var m=newmap(el);
+      strait:function(el){var m=newmap(el);m.setView([35.95,-4.15],8);
         route(m,[[35.55,-5.20],[35.74,-5.28],[35.889,-5.307]],'mig','#e23149');
         route(m,[[35.10,-2.93],[35.29,-2.938]],'mig','#e23149');
         route(m,[[35.80,-5.78],[36.00,-5.60]],'narco','#e3c06a');
         mark(m,[35.889,-5.307],'CEUTA','red','right');mark(m,[35.292,-2.938],'MELILLA','red','right');
         mark(m,[35.176,-2.43],'Chafarinas','red','left');mark(m,[36.013,-5.604],'Tarifa','cy','left');mark(m,[36.62,-6.36],'Rota','cy','left');mark(m,[35.78,-5.81],'Tánger','cy','left');
         var gen=[[35.0,-6.5],[37.0,-1.8]],zin=[[35.05,-5.95],[36.25,-2.5]];
-        return {map:m,apply:function(s){m.flyToBounds(s>=1?zin:gen,{duration:1.1,padding:[18,18]});}};},
-      crime:function(el){var m=newmap(el);
+        return {map:m,apply:function(s){m.fitBounds(s>=1?zin:gen,{padding:[18,18]});}};},
+      crime:function(el){var m=newmap(el);m.setView([36.3,-4.5],7);
         var dst=[[36.84,-2.46,'Almería','right'],[36.72,-4.42,'Málaga','top'],[36.53,-6.29,'Cádiz','left'],[37.26,-6.95,'Huelva','left']],org=[[35.30,-2.30],[35.20,-3.90],[35.45,-5.60],[35.55,-6.95]],i;
         for(i=0;i<4;i++){route(m,[org[i],[dst[i][0],dst[i][1]]],'mig','#e23149');mark(m,[dst[i][0],dst[i][1]],dst[i][2],'red',dst[i][3]);}
-        m.fitBounds([[34.9,-7.4],[37.6,-1.7]],{padding:[18,18]});return {map:m,apply:function(){}};},
-      canarias:function(el){var m=newmap(el);
+        var bb=[[34.9,-7.4],[37.6,-1.7]];return {map:m,apply:function(){m.fitBounds(bb,{padding:[18,18]});}};},
+      canarias:function(el){var m=newmap(el);m.setView([28.3,-15.4],7);
         L.polygon([[29.5,-18.3],[29.5,-13.2],[27.2,-13.2],[27.2,-18.3]],{color:'#5fd0e6',weight:2,dashArray:'8 8',fillColor:'#5fd0e6',fillOpacity:.06}).addTo(m).bindTooltip('ZEE ESPAÑA · CANARIAS',{permanent:true,direction:'center',className:'ltt cy'});
         L.polygon([[29.5,-13.2],[29.5,-11.6],[27.2,-11.6],[27.2,-13.2]],{color:'#e23149',weight:1.5,dashArray:'6 6',fillColor:'#e23149',fillOpacity:.14}).addTo(m).bindTooltip('Pretensión marroquí',{permanent:true,direction:'center',className:'ltt'});
         L.polyline([[28.50,-13.86],[28.62,-12.95]],{color:'#fff',weight:2,dashArray:'5 5'}).addTo(m).bindTooltip('≈ 100 km',{permanent:true,direction:'top',className:'ltt'});
@@ -626,20 +626,21 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
         mark(m,[28.36,-14.05],'Fuerteventura','cy','right');mark(m,[28.00,-15.60],'Gran Canaria','cy','top');mark(m,[28.29,-16.62],'Tenerife','cy','left');
         mark(m,[27.94,-12.92],'Tarfaya','red','right');mark(m,[23.95,-20.80],'MONTE TROPIC','gold','top');
         var gen=[[27.4,-18.5],[29.4,-12.3]],wide=[[23.3,-21.6],[29.6,-11.4]];
-        return {map:m,apply:function(s){m.flyToBounds(s>=1?wide:gen,{duration:1.2,padding:[22,22]});}};},
-      energy:function(el){var m=newmap(el);
+        return {map:m,apply:function(s){m.fitBounds(s>=1?wide:gen,{padding:[22,22]});}};},
+      energy:function(el){var m=newmap(el);m.setView([38.7,-1.0],6);
         route(m,[[35.31,-1.36],[36.84,-2.46]],'gas','#7fe0b0');
         route(m,[[34.90,-1.90],[34.20,-4.20],[35.20,-5.40],[36.01,-5.60]],'gas','#7fe0b0');
         route(m,[[41.38,2.17],[43.30,5.37]],'h2','#e3c06a');
         mark(m,[36.84,-2.46],'Almería','cy','left');mark(m,[35.88,-5.50],'Tánger-MED','gold','right');mark(m,[34.90,-4.50],'Fondo Rif','gold','right');
         mark(m,[41.38,2.17],'Barcelona','cy','left');mark(m,[43.30,5.37],'Marsella · FRANCIA','gold','left');
-        m.fitBounds([[33.6,-7.8],[44.4,6.6]],{padding:[22,22]});return {map:m,apply:function(){}};}
+        var be=[[33.6,-7.8],[44.4,6.6]];return {map:m,apply:function(){m.fitBounds(be,{padding:[22,22]});}};}
     };
+    function refresh(o,s){try{o.map.invalidateSize();o.apply(s);}catch(e){}}
+    addEventListener('resize',function(){for(var k in inst)refresh(inst[k],inst[k]._l||0);});
     return {ensure:function(s){var id=s.dataset.lmap;if(!id||!B[id]||inst[id])return;var o=B[id](s.querySelector('.lmap'));inst[id]=o;o._l=0;
-        setTimeout(function(){o.map.invalidateSize();o.apply(o._l);},100);
-        setTimeout(function(){o.map.invalidateSize();o.apply(o._l);},450);
-        setTimeout(function(){o.map.invalidateSize();o.apply(o._l);},900);},
-      step:function(s,cur){var id=s.dataset.lmap;if(inst[id]){inst[id]._l=cur;inst[id].apply(cur);}}};
+        requestAnimationFrame(function(){refresh(o,0);});
+        setTimeout(function(){refresh(o,o._l);},150);setTimeout(function(){refresh(o,o._l);},500);setTimeout(function(){refresh(o,o._l);},1000);},
+      step:function(s,cur){var id=s.dataset.lmap;if(inst[id]){inst[id]._l=cur;refresh(inst[id],cur);}}};
   })();
   function show(i){slides[si].classList.remove('active');si=i;slides[si].classList.add('active');applySteps(si);chrome();}
   function next(){if(steps[si]<maxStep(slides[si])){steps[si]++;applySteps(si);}else if(si<slides.length-1){steps[si+1]=0;show(si+1);}}
