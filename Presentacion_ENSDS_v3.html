@@ -105,7 +105,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
 /* cards / pilares */
 .grid{display:grid;gap:clamp(16px,1.6vw,26px);margin-top:clamp(22px,3vh,40px)}
 .g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
-.card{padding:clamp(18px,2vw,32px);border-radius:20px;border:1px solid var(--line);background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.02));backdrop-filter:blur(8px);min-height:clamp(180px,24vh,260px);display:flex;flex-direction:column;justify-content:flex-end;min-width:0;overflow-wrap:break-word}
+.card{padding:clamp(18px,2vw,32px);border-radius:20px;border:1px solid var(--line);background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.02));backdrop-filter:blur(8px);min-height:clamp(180px,24vh,260px);display:flex;flex-direction:column;justify-content:flex-end;min-width:0;overflow-wrap:normal;word-break:normal;hyphens:none}
 .card .cn{font-family:var(--disp);font-weight:800;letter-spacing:.10em;font-size:clamp(14px,1.3vw,20px);color:var(--gold);text-transform:uppercase}
 .card h4{font-family:var(--disp);font-weight:800;font-size:clamp(18px,1.75vw,28px);margin-top:8px;line-height:1.1}
 .card .big{font-family:var(--disp);font-weight:800;font-size:clamp(22px,2.2vw,34px);color:#fff;margin-top:6px;display:block}
@@ -347,7 +347,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
   <!-- 6 · MAPA TEATRO ESTRATÉGICO (mapa real · general -> estrecho) -->
   <section class="slide map" data-blk="El teatro estratégico" data-lmap="strait">
     <div class="lmap" id="map-strait"></div>
-    <div class="mappanel bl">
+    <div class="mappanel bl step" data-step="1">
       <div class="kicker step" data-step="1">El teatro estratégico</div>
       <div class="idea step d1" data-step="1" style="font-size:clamp(28px,3.4vw,54px)">La amenaza sobre la soberanía<br>española en el <span class="hl">flanco sur.</span></div>
     </div>
@@ -357,7 +357,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
   <section class="slide map" data-blk="II · Canarias · la ZEE" data-lmap="canarias">
     <div class="lmap" id="map-canarias"></div>
     <span class="stepper" data-step="1" style="display:none"></span>
-    <div class="mappanel right">
+    <div class="mappanel right" style="top:clamp(26px,4vh,52px);transform:none">
       <div class="kicker step">Bloque II · El Atlántico</div>
       <div class="idea step d1" style="font-size:clamp(28px,3.4vw,54px)">Nueva amenaza:<br>las <span class="cy">Canarias.</span></div>
       <div class="lead step d1" style="margin-left:auto;color:var(--cyan)">Marruecos disputa la ZEE atlántica.</div>
@@ -438,7 +438,13 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
     <div class="content">
       <div class="kicker step">Bloque III · Ideas-fuerza originales</div>
       <h2 class="title step" style="margin-bottom:.3em">Cinco palancas inéditas</h2>
-      <div class="grid" style="grid-template-columns:repeat(5,1fr)">
+      <style>
+        #s12grid{grid-template-columns:repeat(5,1fr);gap:clamp(12px,1.2vw,20px)}
+        #s12grid .card{padding:clamp(16px,1.5vw,24px);min-height:clamp(170px,22vh,240px)}
+        #s12grid .card h4{font-size:clamp(15px,1.35vw,21px);line-height:1.18;text-wrap:balance}
+        #s12grid .card .cn{font-size:clamp(13px,1.15vw,17px)}
+      </style>
+      <div class="grid" id="s12grid">
         <div class="card gold pop" data-step="1"><div class="cn">Atlántico</div><h4>Soberanía compartida · Monte Tropic</h4></div>
         <div class="card gold pop" data-step="2"><div class="cn">FIBEM</div><h4>Fondo de Inversión Bilateral · 3.000 M€</h4></div>
         <div class="card gold pop" data-step="3"><div class="cn">Fondo Rif</div><h4>1.000 M€ · desarrollo y antinarcótico</h4></div>
@@ -455,6 +461,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
       <div class="kicker step">Bloque III · Energía e interconexión</div>
       <div class="idea step d1" style="font-size:clamp(26px,3.3vw,52px)">La energía es el incentivo<br>que hace <span class="hl">caro incumplir.</span></div>
       <div class="chips step d2"><span class="chip g">Gasoductos</span><span class="chip g">H₂ verde</span><span class="chip g">Francia · H₂Med</span></div>
+      <div class="lead step d3" style="font-size:clamp(12px,1.05vw,16px);color:var(--mut);margin-top:12px;max-width:46ch">Norte: <b>BarMar</b>, hidroducto <b>submarino</b> Barcelona–Marsella, alternativa al MidCat <b>vetado por Francia</b>. Sur: <b>flujo inverso</b> España→Marruecos (propuesta).</div>
     </div>
   </section>
 
@@ -631,8 +638,10 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
         route(m,[[35.31,-1.36],[36.84,-2.46]],'gas','#7fe0b0');
         route(m,[[34.90,-1.90],[34.20,-4.20],[35.20,-5.40],[36.01,-5.60]],'gas','#7fe0b0');
         route(m,[[41.38,2.17],[43.30,5.37]],'h2','#e3c06a');
+        route(m,[[36.13,-5.45],[35.88,-5.50],[35.30,-4.95],[34.90,-4.50]],'prop','#ff9d3c');
         mark(m,[36.84,-2.46],'Almería','cy','left');mark(m,[35.88,-5.50],'Tánger-MED','gold','right');mark(m,[34.90,-4.50],'Fondo Rif','gold','right');
-        mark(m,[41.38,2.17],'Barcelona','cy','left');mark(m,[43.30,5.37],'Marsella · FRANCIA','gold','left');
+        mark(m,[36.34,-5.28],'España → Marruecos · propuesta','gold','left');
+        mark(m,[41.38,2.17],'Barcelona','cy','left');mark(m,[43.30,5.37],'Marsella · BarMar (H2Med)','gold','left');
         var be=[[33.6,-7.8],[44.4,6.6]];return {map:m,apply:function(){m.fitBounds(be,{padding:[22,22]});}};}
     };
     function refresh(o,s){try{o.map.invalidateSize();o.apply(s);}catch(e){}}
