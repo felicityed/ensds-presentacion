@@ -1,0 +1,13 @@
+node_modules/
+*.log
+.DS_Store
+
+# Documentos fuente pesados: no hacen falta para el deploy de la presentación
+*.docx
+*.pptx
+*.pdf
+
+# Versiones antiguas de la presentación (solo desplegamos la v3)
+Presentacion_ENSDS_Espana_Marruecos.html
+Presentacion_ENSDS_v2_cinematica.html
+extract_comments.html

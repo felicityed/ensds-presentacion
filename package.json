@@ -1,0 +1,12 @@
+{
+  "name": "ensds-presentacion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Estrategia Nacional de Seguridad, Defensa y Soberania - Espana / Marruecos (TFM ISSEP)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
