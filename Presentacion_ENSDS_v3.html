@@ -137,7 +137,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
   transition:opacity .7s ease, transform .8s cubic-bezier(.2,.9,.2,1);opacity:0;transform:scaleY(.3) translateY(40px)}
 .pillar.in{opacity:1;transform:none}
 .pillar .pn{font-family:var(--disp);font-weight:800;letter-spacing:.10em;color:var(--gold);font-size:clamp(17px,1.6vw,26px)}
-.pillar h4{font-family:var(--disp);font-weight:800;font-size:clamp(28px,3vw,48px);margin-top:12px;line-height:1.05}
+.pillar h4{font-family:var(--disp);font-weight:800;font-size:clamp(28px,3vw,48px);margin-top:12px;line-height:1.05;overflow-wrap:normal;word-break:keep-all;hyphens:none}
 
 /* barras */
 .bars{display:flex;flex-direction:column;gap:clamp(16px,2.2vh,32px);margin-top:clamp(18px,2.4vh,36px);max-width:1100px;margin-left:auto;margin-right:auto}
@@ -343,35 +343,31 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
   </section>
 
   <!-- 4 · BLOQUE I · LA TRAMPA -->
-  <section class="slide photo" data-blk="I · La trampa relacional">
+  <section class="slide photo" id="s4" data-blk="I · La trampa relacional">
     <div class="bg" style="background-image:url('imagenes/Valla_Melilla_1.jpg')"></div>
+    <video class="bgvid d4vid" muted loop playsinline preload="auto" data-step="1" poster="imagenes/Valla_Melilla_1.jpg"><source src="imagenes/NarcoLancha_1_web.mp4" type="video/mp4"></video>
+    <style>
+      #s4 .d4vid{opacity:0;transition:opacity .8s ease;z-index:0}
+      #s4 .d4vid.in{opacity:1}
+      #s4:has(.d4vid.in) .d4hide{opacity:0!important;pointer-events:none;transition:opacity .5s ease}
+      #s4 .d4new{opacity:0;transition:opacity .8s ease .15s;margin-top:clamp(18px,2.6vh,36px)}
+      #s4 .d4new.in{opacity:1}
+      #s4 .d4new .d4title{font-family:var(--disp);font-weight:800;font-size:clamp(30px,3.8vw,62px);line-height:1.04;max-width:26ch}
+      #s4 .d4new .d4sub{font-family:var(--disp);font-weight:700;font-size:clamp(20px,2.3vw,38px);margin-top:.4em;color:#fff}
+      #s4 .d4new .d4nums{display:flex;gap:clamp(34px,6vw,110px);flex-wrap:wrap;align-items:baseline;margin-top:clamp(18px,2.6vh,38px)}
+      #s4 .d4new .d4nums b{font-family:var(--disp);font-weight:800;color:var(--esp);font-size:clamp(54px,8.5vw,134px);line-height:.82}
+    </style>
     <div class="content">
-      <div class="kicker step">Bloque I · La trampa relacional</div>
-      <div class="idea step d1">El <span class="red">único Estado</span> del mundo<br>que reclama territorio español.</div>
+      <div class="kicker step d4hide">Bloque I · La trampa relacional</div>
+      <div class="idea step d1 d4hide">El <span class="red">único Estado</span> del mundo<br>que reclama territorio español.</div>
       <div class="chips step d3"><span class="chip">Territorial</span><span class="chip">Migratorio</span><span class="chip">Criminal</span><span class="chip">Terrorista</span><span class="chip">Diplomático</span></div>
-      <div class="stats step d4">
+      <div class="stats step d4 d4hide">
         <div class="stat"><div class="v" data-count="2700" data-suf=" M€">0</div><div class="l">UE → Marruecos sin tratado vinculante</div></div>
         <div class="stat"><div class="v r" data-count="0">0</div><div class="l">tratados vinculantes en 50 años</div></div>
       </div>
-    </div>
-    <style>
-      .slide:has(#d4two.in) > .content{opacity:0;transition:opacity .5s ease}
-      #d4two{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;transition:opacity .9s ease}
-      #d4two.in{opacity:1}
-      #d4two .bgvid{z-index:0}
-      #d4two .d4scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(4,8,16,.70),rgba(4,8,16,.40) 32%,rgba(4,8,16,.92))}
-      #d4two .content{position:relative;z-index:2;width:100%;max-width:1340px;margin:0 auto;padding-bottom:clamp(18px,3.6vh,54px)}
-      #d4two .d4kick{font-family:var(--disp);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-size:clamp(14px,1.3vw,20px);margin-bottom:.6em}
-      #d4two .d4title{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.3vw,54px);line-height:1.1;max-width:30ch;margin-bottom:clamp(20px,3vh,40px)}
-      #d4two .d4nums{display:flex;gap:clamp(30px,5.5vw,100px);flex-wrap:wrap;align-items:baseline}
-      #d4two .d4nums b{font-family:var(--disp);font-weight:800;color:var(--esp);font-size:clamp(52px,8.5vw,132px);line-height:.82}
-    </style>
-    <div class="d4two" data-step="1">
-      <video class="bgvid" autoplay muted loop playsinline preload="auto" poster="imagenes/Valla_Melilla_1.jpg"><source src="imagenes/NarcoLancha_1.mp4" type="video/mp4"></video>
-      <div class="d4scrim"></div>
-      <div class="content">
-        <div class="d4kick">El coste real · soberanía y seguridad</div>
-        <h2 class="d4title">La criminalidad, el narcotráfico y la inmigración irregular nos cuestan mucho más que dinero: <span class="red">socavan nuestra soberanía y seguridad.</span></h2>
+      <div class="d4new" data-step="1">
+        <h2 class="d4title">La criminalidad, el narcotráfico y la inmigración irregular cuestan mucho más que dinero.</h2>
+        <div class="d4sub">Socavan nuestra <span class="red">soberanía y seguridad.</span></div>
         <div class="d4nums"><b>+100</b><b>23</b><b>+10.500</b></div>
       </div>
     </div>
@@ -425,11 +421,12 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
       @keyframes mtrays{0%{opacity:.5;transform:translateX(-3%)}100%{opacity:1;transform:translateX(3%)}}
       #s7scene .mtui{position:absolute;left:0;right:0;bottom:clamp(34px,7vh,86px);z-index:3;text-align:center;color:#fff;text-shadow:0 4px 26px #000;padding:0 6vw}
       #s7scene .mttag{font-family:var(--disp);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-size:clamp(12px,1.2vw,18px)}
-      #s7scene .mttitle{font-family:var(--disp);font-weight:800;font-size:clamp(40px,6.4vw,108px);letter-spacing:.04em;margin:.08em 0;line-height:1;background:linear-gradient(180deg,#fff,#cfe6ff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 34px rgba(130,205,255,.45))}
-      #s7scene .mtsub{font-size:clamp(16px,1.8vw,28px);color:#d2e3f2;font-weight:600}
+      #s7scene .mttitle{font-family:var(--disp);font-weight:800;font-size:clamp(44px,6.4vw,104px);margin:.06em 0;line-height:1;color:var(--paper);text-shadow:0 6px 30px rgba(0,0,0,.6)}
+      #s7scene .mtsub{font-family:var(--disp);font-weight:700;font-size:clamp(22px,2.5vw,40px);color:#fff}
       #s7scene .mtchips{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
-      #s7scene .mtchips span{font-family:var(--disp);font-weight:800;font-size:clamp(14px,1.3vw,21px);color:var(--gold);border:1px solid rgba(227,192,106,.5);border-radius:999px;padding:8px 18px;background:rgba(227,192,106,.10);backdrop-filter:blur(4px)}
-      #s7scene .mtdepth{margin-top:16px;color:#cfe0f0;font-weight:600;font-size:clamp(14px,1.35vw,21px);max-width:30ch;margin-left:auto;margin-right:auto}
+      #s7scene .mtchips{margin-top:22px}
+      #s7scene .mtchips span{font-family:var(--disp);font-weight:800;font-size:clamp(19px,1.9vw,30px);color:var(--gold);border:1px solid rgba(227,192,106,.5);border-radius:999px;padding:10px 24px;background:rgba(227,192,106,.10);backdrop-filter:blur(4px)}
+      #s7scene .mtdepth{margin-top:22px;color:#dfeaf5;font-weight:600;font-size:clamp(19px,1.9vw,30px);max-width:34ch;margin-left:auto;margin-right:auto}
       #s7scene .mtkm{color:var(--gold);font-weight:800;white-space:nowrap}
       #s7scene .mtui>*{opacity:0;transform:translateY(28px)}
       #s7scene.in .mtui>*{animation:mtrise .9s cubic-bezier(.2,.8,.2,1) forwards}
@@ -444,7 +441,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
       <div class="mtui">
         <div class="mttag">Atlántico · el tesoro del fondo</div>
         <h2 class="mttitle">Monte Tropic</h2>
-        <div class="mtsub">Soberanía compartida — condominio <b>50/50</b>.</div>
+        <div class="mtsub">Un nuevo punto de presión entre España y Marruecos.</div>
         <div class="mtchips"><span>Telurio</span><span>Cobalto</span><span>Tierras raras</span></div>
         <div class="mtdepth">El mayor depósito estratégico del Atlántico. Sin precedentes en el mundo. <span class="mtkm">≈ −1.000 m</span></div>
       </div>
@@ -509,7 +506,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
     <div class="content">
       <div class="kicker step">Bloque II · El Tratado Hispano-Marroquí</div>
       <h2 class="title step" style="margin-bottom:.3em">Cuatro pilares, un instrumento</h2>
-      <div class="pillars">
+      <div class="pillars" style="grid-template-columns:1fr 1fr 1fr 1.28fr">
         <div class="pillar" data-step="1"><div class="pn">Pilar I</div><h4>Soberanía territorial</h4></div>
         <div class="pillar" data-step="2"><div class="pn">Pilar II</div><h4>Mar y energía</h4></div>
         <div class="pillar" data-step="3"><div class="pn">Pilar III</div><h4>Seguridad integral</h4></div>
@@ -564,7 +561,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
 
   <!-- 15 · LÍNEAS ROJAS (fondo por fase + énfasis) -->
   <section class="slide photo" data-blk="II · Líneas rojas" data-bgsteps="1">
-    <video class="bgl" data-on="0 1 3 5" autoplay muted loop playsinline preload="metadata" poster="imagenes/narcolanchas_estrecho_4k.jpg" style="opacity:1;object-fit:cover"><source src="imagenes/NarcoLancha_2.mp4" type="video/mp4"></video>
+    <video class="bgl" data-on="0 1 3 5" autoplay muted loop playsinline preload="metadata" poster="imagenes/narcolanchas_estrecho_4k.jpg" style="opacity:1;object-fit:cover"><source src="imagenes/NarcoLancha_2_web.mp4" type="video/mp4"></video>
     <div class="bgl" data-on="2" style="background-image:url('imagenes/F10-Espana-conjunto.jpg')"></div>
     <div class="bgl" data-on="4" style="background-image:url('imagenes/F110_espana_1.jpg')"></div>
     <div class="bgl" data-on="6" style="background-image:url('imagenes/S81_imagen_1.jpg')"></div>
@@ -747,8 +744,8 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
         var bb=[[34.9,-7.4],[37.6,-1.7]];return {map:m,apply:function(){m.fitBounds(bb,{padding:[18,18]});}};},
       canarias:function(el){var m=newmap(el);m.setView([26.0,-16.0],6);
         L.polygon([[35.6,-5.9],[34.5,-7.0],[33.0,-8.8],[30.8,-10.2],[28.6,-11.6],[27.6,-13.0],[25.8,-14.6],[23.8,-16.2],[21.5,-17.2],[20.6,-17.5],[20.6,-19.9],[35.6,-19.9]],{color:'#ff5a6e',weight:1,opacity:.28,fillColor:'#e23149',fillOpacity:.10}).addTo(m);
-        L.marker([24.0,-18.7],{interactive:false,icon:L.divIcon({className:'',iconSize:[0,0]})}).addTo(m).bindTooltip('ZEE ESPAÑA · aguas en disputa',{permanent:true,direction:'center',className:'ltt'});
-        L.polyline([[28.50,-13.86],[28.62,-12.95]],{color:'#fff',weight:2,dashArray:'5 5'}).addTo(m).bindTooltip('≈ 100 km',{permanent:true,direction:'top',className:'ltt'});
+        L.marker([27.2,-19.4],{interactive:false,icon:L.divIcon({className:'',iconSize:[0,0]})}).addTo(m).bindTooltip('ZEE ESPAÑA · aguas en disputa',{permanent:true,direction:'center',className:'ltt'});
+        L.polyline([[28.36,-14.05],[27.94,-12.92]],{color:'#fff',weight:2,dashArray:'5 5'}).addTo(m).bindTooltip('≈ 100 km',{permanent:true,direction:'top',className:'ltt'});
         route(m,[[27.20,-13.30],[28.15,-14.25]],'mig','#e23149');route(m,[[23.75,-15.95],[27.70,-17.90]],'mig','#e23149');route(m,[[20.95,-17.05],[27.85,-15.55]],'mig','#ff5a6e');
         mark(m,[28.36,-14.05],'Fuerteventura','cy','right');mark(m,[28.00,-15.60],'Gran Canaria','cy','top');mark(m,[28.29,-16.62],'Tenerife','cy','left');
         mark(m,[27.94,-12.92],'Tarfaya','red','right');mark(m,[25.8,-13.2],'SÁHARA OCCIDENTAL','red','right');mark(m,[23.71,-15.94],'Dakhla','red','right');mark(m,[20.93,-17.03],'Nouadhibou · MAURITANIA','red','top');
@@ -859,6 +856,10 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
   if(sec) mo.observe(sec,{attributes:true,attributeFilter:['class']});
   check();
 })();
+/* Diapo 4 · reproducir el vídeo solo cuando aparece (evita lag al precargar) */
+(function(){var v=document.querySelector('.d4vid');if(!v)return;
+  function upd(){if(v.classList.contains('in')){var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){});}else if(v.pause){v.pause();}}
+  new MutationObserver(upd).observe(v,{attributes:true,attributeFilter:['class']});upd();})();
 </script>
 </body>
 </html>
