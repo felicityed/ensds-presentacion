@@ -342,7 +342,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
 
   <!-- 4 · BLOQUE I · LA TRAMPA -->
   <section class="slide photo" data-blk="I · La trampa relacional">
-    <video class="bgvid" autoplay muted loop playsinline preload="auto" poster="imagenes/Valla_Melilla_1.jpg"><source src="imagenes/NarcoLancha_1.mp4" type="video/mp4"></video>
+    <div class="bg" style="background-image:url('imagenes/Valla_Melilla_1.jpg')"></div>
     <div class="content">
       <div class="kicker step">Bloque I · La trampa relacional</div>
       <div class="idea step d1">El <span class="red">único Estado</span> del mundo<br>que reclama territorio español.</div>
@@ -363,7 +363,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
       #d4two .d4stats .l{max-width:24ch}
     </style>
     <div class="d4two step" data-step="1">
-      <video class="bgvid" autoplay muted loop playsinline preload="metadata" poster="imagenes/narcolanchas_estrecho_4k.jpg"><source src="imagenes/NarcoLancha_2.mp4" type="video/mp4"></video>
+      <video class="bgvid" autoplay muted loop playsinline preload="auto" poster="imagenes/Valla_Melilla_1.jpg"><source src="imagenes/NarcoLancha_1.mp4" type="video/mp4"></video>
       <div class="d4scrim"></div>
       <div class="content">
         <div class="d4kick">El coste real · soberanía y seguridad</div>
@@ -573,18 +573,20 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
 
   <!-- 15 · LÍNEAS ROJAS (fondo por fase + énfasis) -->
   <section class="slide photo" data-blk="II · Líneas rojas" data-bgsteps="1">
-    <video class="bgl" data-from="0" autoplay muted loop playsinline preload="metadata" poster="imagenes/narcolanchas_estrecho_4k.jpg" style="opacity:1;object-fit:cover"><source src="imagenes/NarcoLancha_2.mp4" type="video/mp4"></video>
-    <div class="bgl" data-from="2" style="background-image:url('imagenes/L61_imagen_1.jpg')"></div>
-    <div class="bgl" data-from="3" style="background-image:url('imagenes/S81_imagen_1.jpg')"></div>
+    <video class="bgl" data-on="0 1 3 5" autoplay muted loop playsinline preload="metadata" poster="imagenes/narcolanchas_estrecho_4k.jpg" style="opacity:1;object-fit:cover"><source src="imagenes/NarcoLancha_2.mp4" type="video/mp4"></video>
+    <div class="bgl" data-on="2" style="background-image:url('imagenes/F10-Espana-conjunto.jpg')"></div>
+    <div class="bgl" data-on="4" style="background-image:url('imagenes/F110_espana_1.jpg')"></div>
+    <div class="bgl" data-on="6" style="background-image:url('imagenes/S81_imagen_1.jpg')"></div>
     <div class="content">
+      <span class="stepper" data-step="6" style="display:none"></span>
       <div class="kicker step">Bloque II · Líneas rojas</div>
       <h2 class="title step" style="margin-bottom:.3em">Escalada graduada</h2>
       <div class="phases">
         <div class="phase f1 pop" data-step="1"><div class="pf">Escalada 1 · 15 días</div><h4>Presión diplomática</h4></div>
-        <div class="phase f2 pop" data-step="2"><div class="pf">Escalada 2</div><h4>Coerción disuasoria</h4></div>
-        <div class="phase f3 pop" data-step="3"><div class="pf">Escalada 3 · último recurso</div><h4>Defensa activa</h4></div>
+        <div class="phase f2 pop" data-step="3"><div class="pf">Escalada 2</div><h4>Coerción disuasoria</h4></div>
+        <div class="phase f3 pop" data-step="5"><div class="pf">Escalada 3 · último recurso</div><h4>Defensa activa</h4></div>
       </div>
-      <div class="quote step" data-step="3" style="font-size:clamp(20px,2.5vw,40px);margin-top:clamp(20px,2.6vh,38px)">Una línea roja sin consecuencias es una invitación a probar.</div>
+      <div class="quote step" data-step="5" style="font-size:clamp(20px,2.5vw,40px);margin-top:clamp(20px,2.6vh,38px)">Una línea roja sin consecuencias es una invitación a probar.</div>
     </div>
   </section>
 
@@ -713,7 +715,12 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
     [].forEach.call(s.querySelectorAll('.mk'),function(m){var ds=m.getAttribute('data-step');if(ds===null)return;if(+ds<=cur)m.classList.add('on');else m.classList.remove('on');});
     [].forEach.call(s.querySelectorAll('.in [data-count],.in[data-count]'),function(e){fireAnim(e);});
     if(s.dataset.lmap){Maps.ensure(s);Maps.step(s,cur);}
-    if(s.dataset.bgsteps){var bl=s.querySelectorAll('.bgl'),best=null;[].forEach.call(bl,function(b){if(+b.getAttribute('data-from')<=cur)best=b;});[].forEach.call(bl,function(b){b.style.opacity=(b===best)?1:0;});}
+    if(s.dataset.bgsteps){var bl=s.querySelectorAll('.bgl'),best=null;
+      [].forEach.call(bl,function(b){var on=b.getAttribute('data-on');
+        if(on!==null){if((' '+on+' ').indexOf(' '+cur+' ')>=0)best=b;}
+        else if(+b.getAttribute('data-from')<=cur){best=b;}});
+      [].forEach.call(bl,function(b){var vis=(b===best);b.style.opacity=vis?1:0;
+        if(b.tagName==='VIDEO'){if(vis){var pr=b.play&&b.play();if(pr&&pr.catch)pr.catch(function(){});}else if(b.pause){b.pause();}}});}
   }
   var Maps=(function(){
     var SN='http://www.w3.org/2000/svg',CURID='x';
