@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/vendor/leaflet.css">
 <script src="/vendor/leaflet.js"></script>
 <script src="/vendor/leaflet.polylineDecorator.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 :root{
   --ink:#060912;--ink2:#0a1124;--paper:#f5f2ea;--gold:#e3c06a;--gold-d:#b9933f;
@@ -399,6 +400,38 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
         <div class="quote step d1">Una ZEE <span class="red">secuestrada</span> a 100 km de casa.</div>
       </div>
     </div>
+    <style>
+      #s7scene{position:absolute;inset:0;z-index:30;overflow:hidden;pointer-events:none}
+      #s7scene .mtbg{position:absolute;inset:0;z-index:0;background:radial-gradient(120% 100% at 50% 6%,#0a2c4c 0%,#06182b 44%,#02080f 100%)}
+      #s7scene .mtfall{position:absolute;left:50%;bottom:0;z-index:0;width:64%;height:58%;transform:translateX(-50%);background:linear-gradient(180deg,#2a5d7a,#0a2236);clip-path:polygon(50% 0,100% 100%,0 100%);opacity:.85;filter:drop-shadow(0 0 70px rgba(90,190,255,.25))}
+      #s7scene #mtcanvas{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block}
+      #s7scene .mtrays{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(115deg,rgba(140,210,255,.12) 0%,transparent 24%,transparent 58%,rgba(140,210,255,.07) 80%,transparent 100%);mix-blend-mode:screen;animation:mtrays 8s ease-in-out infinite alternate}
+      @keyframes mtrays{0%{opacity:.5;transform:translateX(-3%)}100%{opacity:1;transform:translateX(3%)}}
+      #s7scene .mtui{position:absolute;left:0;right:0;bottom:clamp(34px,7vh,86px);z-index:3;text-align:center;color:#fff;text-shadow:0 4px 26px #000;padding:0 6vw}
+      #s7scene .mttag{font-family:var(--disp);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-size:clamp(12px,1.2vw,18px)}
+      #s7scene .mttitle{font-family:var(--disp);font-weight:800;font-size:clamp(40px,6.4vw,108px);letter-spacing:.04em;margin:.08em 0;line-height:1;background:linear-gradient(180deg,#fff,#cfe6ff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 34px rgba(130,205,255,.45))}
+      #s7scene .mtsub{font-size:clamp(16px,1.8vw,28px);color:#d2e3f2;font-weight:600}
+      #s7scene .mtchips{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+      #s7scene .mtchips span{font-family:var(--disp);font-weight:800;font-size:clamp(14px,1.3vw,21px);color:var(--gold);border:1px solid rgba(227,192,106,.5);border-radius:999px;padding:8px 18px;background:rgba(227,192,106,.10);backdrop-filter:blur(4px)}
+      #s7scene .mtdepth{margin-top:16px;color:#90b6cf;font-weight:700;font-size:clamp(13px,1.2vw,18px);letter-spacing:.06em}
+      #s7scene .mtui>*{opacity:0;transform:translateY(28px)}
+      #s7scene.in .mtui>*{animation:mtrise .9s cubic-bezier(.2,.8,.2,1) forwards}
+      #s7scene.in .mttag{animation-delay:.3s}#s7scene.in .mttitle{animation-delay:.5s}#s7scene.in .mtsub{animation-delay:.78s}#s7scene.in .mtchips{animation-delay:1.02s}#s7scene.in .mtdepth{animation-delay:1.24s}
+      @keyframes mtrise{to{opacity:1;transform:none}}
+    </style>
+    <div class="mtscene step" id="s7scene" data-step="2" aria-hidden="true">
+      <div class="mtbg"></div>
+      <div class="mtfall"></div>
+      <canvas id="mtcanvas"></canvas>
+      <div class="mtrays"></div>
+      <div class="mtui">
+        <div class="mttag">Atlántico · el tesoro del fondo</div>
+        <h2 class="mttitle">MONTE TROPIC</h2>
+        <div class="mtsub">El mayor depósito estratégico del Atlántico — sin precedentes.</div>
+        <div class="mtchips"><span>Telurio</span><span>Cobalto</span><span>Tierras raras</span></div>
+        <div class="mtdepth">≈ −1.000 m · soberanía compartida 50/50</div>
+      </div>
+    </div>
   </section>
 
   <!-- 8 · MONTE TROPIC (imagen que rota/aparece) -->
@@ -703,18 +736,19 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
         var dst=[[36.84,-2.46,'Almería','right'],[36.72,-4.42,'Málaga','top'],[36.53,-6.29,'Cádiz','left'],[37.26,-6.95,'Huelva','left']],org=[[35.30,-2.30],[35.20,-3.90],[35.45,-5.60],[35.55,-6.95]],i;
         for(i=0;i<4;i++){route(m,[org[i],[dst[i][0],dst[i][1]]],'mig','#e23149');mark(m,[dst[i][0],dst[i][1]],dst[i][2],'red',dst[i][3]);}
         var bb=[[34.9,-7.4],[37.6,-1.7]];return {map:m,apply:function(){m.fitBounds(bb,{padding:[18,18]});}};},
-      canarias:function(el){var m=newmap(el);m.setView([28.3,-15.4],7);
-        L.polygon([[29.5,-18.3],[29.5,-13.2],[27.2,-13.2],[27.2,-18.3]],{color:'#5fd0e6',weight:2,dashArray:'8 8',fillColor:'#5fd0e6',fillOpacity:.06}).addTo(m).bindTooltip('ZEE ESPAÑA · CANARIAS',{permanent:true,direction:'center',className:'ltt cy'});
-        L.polygon([[29.5,-13.2],[29.5,-11.6],[27.2,-11.6],[27.2,-13.2]],{color:'#e23149',weight:1.5,dashArray:'6 6',fillColor:'#e23149',fillOpacity:.14}).addTo(m).bindTooltip('Pretensión marroquí',{permanent:true,direction:'center',className:'ltt'});
+      canarias:function(el){var m=newmap(el);m.setView([26.0,-16.0],6);
+        L.polygon([[29.6,-18.4],[29.6,-13.0],[27.0,-13.0],[27.0,-18.4]],{color:'#ff5a6e',weight:1.6,opacity:.85,fillColor:'#e23149',fillOpacity:.17}).addTo(m).bindTooltip('ZEE ESPAÑA · secuestrada',{permanent:true,direction:'center',className:'ltt'});
+        L.polygon([[29.6,-13.0],[29.6,-11.4],[27.0,-11.4],[27.0,-13.0]],{color:'#ff8a3c',weight:1.4,dashArray:'7 6',fillColor:'#ff7a2e',fillOpacity:.20}).addTo(m).bindTooltip('Pretensión marroquí',{permanent:true,direction:'center',className:'ltt gold'});
         L.polyline([[28.50,-13.86],[28.62,-12.95]],{color:'#fff',weight:2,dashArray:'5 5'}).addTo(m).bindTooltip('≈ 100 km',{permanent:true,direction:'top',className:'ltt'});
-        route(m,[[28.80,-12.40],[28.95,-13.55]],'mig','#e23149');route(m,[[28.30,-12.30],[28.40,-13.95]],'mig','#e23149');route(m,[[27.85,-12.55],[27.95,-15.45]],'mig','#e23149');
+        route(m,[[27.20,-13.30],[28.15,-14.25]],'mig','#e23149');route(m,[[23.75,-15.95],[27.70,-17.90]],'mig','#e23149');route(m,[[20.95,-17.05],[27.85,-15.55]],'mig','#ff5a6e');
         mark(m,[28.36,-14.05],'Fuerteventura','cy','right');mark(m,[28.00,-15.60],'Gran Canaria','cy','top');mark(m,[28.29,-16.62],'Tenerife','cy','left');
-        mark(m,[27.94,-12.92],'Tarfaya','red','right');
+        mark(m,[27.94,-12.92],'Tarfaya','red','right');mark(m,[25.8,-13.2],'SÁHARA OCCIDENTAL','red','right');mark(m,[23.71,-15.94],'Dakhla','red','right');mark(m,[20.93,-17.03],'Nouadhibou · MAURITANIA','red','top');
         L.marker([23.95,-20.80],{interactive:false,zIndexOffset:1000,icon:L.divIcon({className:'mtico',iconSize:[0,0],html:'<div class="mt"><span></span><span></span><span></span><i></i><b>MONTE TROPIC</b><em>El tesoro del Atlántico</em></div>'})}).addTo(m);
-        var gen=[[27.4,-18.5],[29.4,-12.3]],wide=[[23.3,-21.6],[29.6,-11.4]],last=-1;
-        return {map:m,apply:function(s){var b=s>=1?wide:gen;
-          if(s>=1&&last<1){last=s;m.flyToBounds(wide,{padding:[22,22],duration:2.0});}
-          else{last=s;m.fitBounds(b,{padding:[22,22],animate:false});}}};},
+        var gen=[[20.5,-20.2],[30.6,-10.4]],mt=[[22.4,-22.6],[25.6,-19.0]],last=-1;
+        return {map:m,apply:function(s){
+          if(s<1){last=s;m.fitBounds(gen,{padding:[16,16],animate:false});}
+          else if(last<1){last=s;m.flyToBounds(mt,{padding:[40,40],duration:2.6});}
+          else{last=s;m.fitBounds(mt,{padding:[40,40],animate:false});}}};},
       energy:function(el){var m=newmap(el);m.setView([38.7,-1.0],6);
         route(m,[[35.31,-1.36],[36.84,-2.46]],'gas','#7fe0b0');
         route(m,[[34.90,-1.90],[34.20,-4.20],[35.20,-5.40],[36.01,-5.60]],'gas','#7fe0b0');
@@ -756,6 +790,65 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
   function ov(force){var open=(force===undefined)?!ovEl.classList.contains('show'):force;ovEl.classList.toggle('show',open);}
   setTimeout(function(){document.getElementById('hint').classList.add('hide');},6500);
   slides[0].classList.add('active');applySteps(0);chrome();
+})();
+</script>
+<script>
+/* Monte Tropic · escena 3D submarina (WebGL · Three.js) con arranque por paso */
+(function(){
+  var el=document.getElementById('s7scene'),cv=document.getElementById('mtcanvas');
+  if(!el||!cv) return;
+  var sec=el.closest('.slide');
+  var scene,cam,rndr,mtn,parts,minerals=[],raf=0,started=false,t0=0;
+  function init(){
+    if(started||!window.THREE) return;
+    try{
+      var W=el.clientWidth||1280,H=el.clientHeight||720;
+      rndr=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:false});
+      rndr.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+      rndr.setSize(W,H,false); rndr.setClearColor(0x041325,1);
+      scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(0x062138,0.020);
+      cam=new THREE.PerspectiveCamera(55,W/H,0.1,400); cam.position.set(0,32,90); cam.lookAt(0,10,0);
+      scene.add(new THREE.AmbientLight(0x3a6a90,0.95));
+      var key=new THREE.DirectionalLight(0xbfe4ff,1.5); key.position.set(-46,84,42); scene.add(key);
+      var glow=new THREE.PointLight(0xe3c06a,1.15,170); glow.position.set(0,28,14); scene.add(glow);
+      var geo=new THREE.ConeGeometry(34,54,72,44,true),p=geo.attributes.position,i,x,y,z,n,f;
+      for(i=0;i<p.count;i++){x=p.getX(i);y=p.getY(i);z=p.getZ(i);
+        n=Math.sin(x*0.6+z*0.4)*1.7+Math.cos(z*0.7-x*0.3)*1.4+Math.sin((x+z)*1.25)*0.8;
+        f=(y+27)/54; p.setX(i,x+n*0.5*(0.4+f)); p.setZ(i,z+n*0.5*(0.4+f)); p.setY(i,y+n*0.3);}
+      geo.computeVertexNormals();
+      mtn=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0x274a63,roughness:0.95,metalness:0.18,flatShading:true}));
+      mtn.position.y=-2; scene.add(mtn);
+      var floor=new THREE.Mesh(new THREE.CircleGeometry(130,48),new THREE.MeshStandardMaterial({color:0x05131f,roughness:1}));
+      floor.rotation.x=-Math.PI/2; floor.position.y=-27; scene.add(floor);
+      var cols=[0xe3c06a,0x5fd0e6,0xff8a3c],k,a,rr,hh,s;
+      for(k=0;k<24;k++){a=Math.random()*Math.PI*2;hh=-18+Math.random()*40;rr=(1-(hh+18)/62)*30;
+        s=new THREE.Mesh(new THREE.SphereGeometry(0.7+Math.random()*0.8,10,10),new THREE.MeshBasicMaterial({color:cols[k%3]}));
+        s.position.set(Math.cos(a)*rr,hh,Math.sin(a)*rr); minerals.push(s); scene.add(s);}
+      var Np=440,pg=new THREE.BufferGeometry(),pa=new Float32Array(Np*3),j;
+      for(j=0;j<Np;j++){pa[j*3]=(Math.random()-0.5)*160;pa[j*3+1]=Math.random()*72-27;pa[j*3+2]=(Math.random()-0.5)*160;}
+      pg.setAttribute('position',new THREE.BufferAttribute(pa,3));
+      parts=new THREE.Points(pg,new THREE.PointsMaterial({color:0x9fd8ff,size:0.6,transparent:true,opacity:0.7}));
+      scene.add(parts);
+      started=true;
+    }catch(e){started=false;try{if(rndr)rndr.dispose();}catch(_){}}
+  }
+  function frame(ts){ if(!started){return;} if(!t0)t0=ts; var t=(ts-t0)/1000,i,pp,y;
+    if(mtn) mtn.rotation.y=t*0.12;
+    if(cam){var r=90-Math.min(t,4.5)*8; cam.position.set(Math.sin(t*0.16)*11,30-Math.min(t,4.5)*2+Math.sin(t*0.6)*1.2,r); cam.lookAt(0,9,0);}
+    for(i=0;i<minerals.length;i++){minerals[i].scale.setScalar(1+Math.sin(t*2+i)*0.4);}
+    if(parts){pp=parts.geometry.attributes.position; for(i=0;i<pp.count;i++){y=pp.getY(i)+0.08; if(y>46)y=-27; pp.setY(i,y);} pp.needsUpdate=true; parts.rotation.y=t*0.03;}
+    try{rndr.render(scene,cam);}catch(e){}
+    raf=requestAnimationFrame(frame);
+  }
+  function resize(){ if(!rndr)return; var W=el.clientWidth||1280,H=el.clientHeight||720; rndr.setSize(W,H,false); if(cam){cam.aspect=W/H;cam.updateProjectionMatrix();} }
+  function start(){ if(!window.THREE)return; if(!started)init(); if(started){resize();t0=0;cancelAnimationFrame(raf);raf=requestAnimationFrame(frame);} }
+  function stop(){ cancelAnimationFrame(raf); raf=0; }
+  function check(){ if(el.classList.contains('in')&&sec&&sec.classList.contains('active'))start(); else stop(); }
+  window.addEventListener('resize',function(){ if(el.classList.contains('in'))resize(); });
+  var mo=new MutationObserver(check);
+  mo.observe(el,{attributes:true,attributeFilter:['class']});
+  if(sec) mo.observe(sec,{attributes:true,attributeFilter:['class']});
+  check();
 })();
 </script>
 </body>
