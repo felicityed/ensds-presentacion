@@ -19,7 +19,10 @@ const MIME = {
   '.webp': 'image/webp',
   '.svg':  'image/svg+xml',
   '.json': 'application/json; charset=utf-8',
-  '.ico':  'image/x-icon'
+  '.ico':  'image/x-icon',
+  '.mp4':  'video/mp4',
+  '.webm': 'video/webm',
+  '.mov':  'video/quicktime'
 };
 
 http.createServer((req, res) => {
@@ -40,9 +43,10 @@ http.createServer((req, res) => {
         return res.end('404 · No encontrado');
       }
       const ext = path.extname(filePath).toLowerCase();
+      const cache = (ext === '.html') ? 'no-store, no-cache, must-revalidate' : 'public, max-age=86400';
       res.writeHead(200, {
         'Content-Type': MIME[ext] || 'application/octet-stream',
-        'Cache-Control': 'no-store, no-cache, must-revalidate'
+        'Cache-Control': cache
       });
       fs.createReadStream(filePath).pipe(res);
     });

@@ -48,6 +48,7 @@ html,body{height:100%;overflow:hidden;background:var(--ink);color:var(--paper);f
 .slide.right .content{text-align:right;margin-left:auto}
 
 .bg,.bgl{position:absolute;inset:-4%;z-index:0;background-size:cover;background-position:center;will-change:transform}
+.bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .slide.active .bg,.slide.active .bgl{animation:kb 34s ease-in-out infinite alternate}
 @keyframes kb{0%{transform:scale(1.08) translate(1.4%,1%)}100%{transform:scale(1.24) translate(-1.4%,-1%)}}
 .bgl{opacity:0;transition:opacity 1s ease}
@@ -341,7 +342,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
 
   <!-- 4 · BLOQUE I · LA TRAMPA -->
   <section class="slide photo" data-blk="I · La trampa relacional">
-    <div class="bg" style="background-image:url('imagenes/Valla_Melilla_1.jpg')"></div>
+    <video class="bgvid" autoplay muted loop playsinline preload="auto" poster="imagenes/Valla_Melilla_1.jpg"><source src="imagenes/NarcoLancha_1.mp4" type="video/mp4"></video>
     <div class="content">
       <div class="kicker step">Bloque I · La trampa relacional</div>
       <div class="idea step d1">El <span class="red">único Estado</span> del mundo<br>que reclama territorio español.</div>
@@ -349,6 +350,29 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
       <div class="stats step d4">
         <div class="stat"><div class="v" data-count="2700" data-suf=" M€">0</div><div class="l">UE → Marruecos sin tratado vinculante</div></div>
         <div class="stat"><div class="v r" data-count="0">0</div><div class="l">tratados vinculantes en 50 años</div></div>
+      </div>
+    </div>
+    <style>
+      #d4two{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:center}
+      #d4two .bgvid{z-index:0}
+      #d4two .d4scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(4,8,16,.82),rgba(4,8,16,.94))}
+      #d4two .content{position:relative;z-index:2}
+      #d4two .d4kick{font-family:var(--disp);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-size:clamp(13px,1.2vw,18px);margin-bottom:.5em}
+      #d4two .d4title{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.4vw,56px);line-height:1.1;max-width:24ch}
+      #d4two .d4stats{display:flex;gap:clamp(22px,3vw,58px);margin-top:clamp(24px,3.4vh,48px);flex-wrap:wrap}
+      #d4two .d4stats .l{max-width:24ch}
+    </style>
+    <div class="d4two step" data-step="1">
+      <video class="bgvid" autoplay muted loop playsinline preload="metadata" poster="imagenes/narcolanchas_estrecho_4k.jpg"><source src="imagenes/NarcoLancha_2.mp4" type="video/mp4"></video>
+      <div class="d4scrim"></div>
+      <div class="content">
+        <div class="d4kick">El coste real · soberanía y seguridad</div>
+        <h2 class="d4title">La criminalidad, el narcotráfico y la inmigración irregular nos cuestan mucho más que dinero: <span class="red">socavan nuestra soberanía y seguridad.</span></h2>
+        <div class="stats d4stats">
+          <div class="stat"><div class="v r" data-count="2">0</div><div class="l">guardias civiles muertos al ser embestidos por una narcolancha · Barbate, 2024</div></div>
+          <div class="stat"><div class="v r" data-count="23">0</div><div class="l">muertos en el salto a la valla de Melilla · 2022</div></div>
+          <div class="stat"><div class="v r" data-count="10457">0</div><div class="l">muertos o desaparecidos camino a España en 2024 · ruta canaria, la más mortífera del mundo</div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -413,7 +437,8 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
       #s7scene .mtsub{font-size:clamp(16px,1.8vw,28px);color:#d2e3f2;font-weight:600}
       #s7scene .mtchips{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
       #s7scene .mtchips span{font-family:var(--disp);font-weight:800;font-size:clamp(14px,1.3vw,21px);color:var(--gold);border:1px solid rgba(227,192,106,.5);border-radius:999px;padding:8px 18px;background:rgba(227,192,106,.10);backdrop-filter:blur(4px)}
-      #s7scene .mtdepth{margin-top:16px;color:#90b6cf;font-weight:700;font-size:clamp(13px,1.2vw,18px);letter-spacing:.06em}
+      #s7scene .mtdepth{margin-top:16px;color:#cfe0f0;font-weight:600;font-size:clamp(14px,1.35vw,21px);max-width:30ch;margin-left:auto;margin-right:auto}
+      #s7scene .mtkm{color:var(--gold);font-weight:800;white-space:nowrap}
       #s7scene .mtui>*{opacity:0;transform:translateY(28px)}
       #s7scene.in .mtui>*{animation:mtrise .9s cubic-bezier(.2,.8,.2,1) forwards}
       #s7scene.in .mttag{animation-delay:.3s}#s7scene.in .mttitle{animation-delay:.5s}#s7scene.in .mtsub{animation-delay:.78s}#s7scene.in .mtchips{animation-delay:1.02s}#s7scene.in .mtdepth{animation-delay:1.24s}
@@ -426,29 +451,15 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
       <div class="mtrays"></div>
       <div class="mtui">
         <div class="mttag">Atlántico · el tesoro del fondo</div>
-        <h2 class="mttitle">MONTE TROPIC</h2>
-        <div class="mtsub">El mayor depósito estratégico del Atlántico — sin precedentes.</div>
+        <h2 class="mttitle">Monte Tropic</h2>
+        <div class="mtsub">Soberanía compartida — condominio <b>50/50</b>.</div>
         <div class="mtchips"><span>Telurio</span><span>Cobalto</span><span>Tierras raras</span></div>
-        <div class="mtdepth">≈ −1.000 m · soberanía compartida 50/50</div>
+        <div class="mtdepth">El mayor depósito estratégico del Atlántico. Sin precedentes en el mundo. <span class="mtkm">≈ −1.000 m</span></div>
       </div>
     </div>
   </section>
 
-  <!-- 8 · MONTE TROPIC (imagen que rota/aparece) -->
-  <section class="slide" data-blk="I · Monte Tropic">
-    <div class="content" style="display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,3vw,60px);align-items:center;max-width:1440px">
-      <div>
-        <div class="kicker step">Atlántico · El tesoro del fondo</div>
-        <div class="idea step d1" style="font-size:clamp(34px,4.4vw,72px)">Soberanía compartida<br>del <span class="hl">Monte Tropic.</span></div>
-        <div class="chips step d3"><span class="chip g">Telurio</span><span class="chip g">Cobalto</span><span class="chip g">Tierras raras</span></div>
-        <div class="lead step d4" style="margin-top:24px">El mayor depósito estratégico del Atlántico. Sin precedentes en el mundo.</div>
-      </div>
-      <div class="step d2" style="display:grid;place-items:center">
-        <img src="imagenes/Monte_Tropic_2.jpg" alt="Monte Tropic" id="tropicImg"
-          style="width:100%;max-width:560px;border-radius:24px;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.5)">
-      </div>
-    </div>
-  </section>
+  <!-- (Diapo 8 'Monte Tropic' fusionada en la escena 3D de la diapo 7) -->
 
   <!-- 9 · CONTEXTO · EL REARME (barras, centrado) -->
   <section class="slide center photo" data-blk="I · El nuevo contexto">
@@ -562,7 +573,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
 
   <!-- 15 · LÍNEAS ROJAS (fondo por fase + énfasis) -->
   <section class="slide photo" data-blk="II · Líneas rojas" data-bgsteps="1">
-    <div class="bgl" data-from="0" style="background-image:url('imagenes/narcolanchas_estrecho_4k.jpg');opacity:1"></div>
+    <video class="bgl" data-from="0" autoplay muted loop playsinline preload="metadata" poster="imagenes/narcolanchas_estrecho_4k.jpg" style="opacity:1;object-fit:cover"><source src="imagenes/NarcoLancha_2.mp4" type="video/mp4"></video>
     <div class="bgl" data-from="2" style="background-image:url('imagenes/L61_imagen_1.jpg')"></div>
     <div class="bgl" data-from="3" style="background-image:url('imagenes/S81_imagen_1.jpg')"></div>
     <div class="content">
@@ -737,8 +748,7 @@ h1{font-family:var(--disp);font-weight:800;line-height:.98;letter-spacing:-.015e
         for(i=0;i<4;i++){route(m,[org[i],[dst[i][0],dst[i][1]]],'mig','#e23149');mark(m,[dst[i][0],dst[i][1]],dst[i][2],'red',dst[i][3]);}
         var bb=[[34.9,-7.4],[37.6,-1.7]];return {map:m,apply:function(){m.fitBounds(bb,{padding:[18,18]});}};},
       canarias:function(el){var m=newmap(el);m.setView([26.0,-16.0],6);
-        L.polygon([[29.6,-18.4],[29.6,-13.0],[27.0,-13.0],[27.0,-18.4]],{color:'#ff5a6e',weight:1.6,opacity:.85,fillColor:'#e23149',fillOpacity:.17}).addTo(m).bindTooltip('ZEE ESPAÑA · secuestrada',{permanent:true,direction:'center',className:'ltt'});
-        L.polygon([[29.6,-13.0],[29.6,-11.4],[27.0,-11.4],[27.0,-13.0]],{color:'#ff8a3c',weight:1.4,dashArray:'7 6',fillColor:'#ff7a2e',fillOpacity:.20}).addTo(m).bindTooltip('Pretensión marroquí',{permanent:true,direction:'center',className:'ltt gold'});
+        L.polygon([[29.4,-13.3],[29.4,-11.9],[27.3,-11.5],[27.3,-13.4]],{color:'#ff5a6e',weight:1.2,opacity:.55,fillColor:'#e23149',fillOpacity:.22}).addTo(m).bindTooltip('ZEE · aguas en disputa',{permanent:true,direction:'center',className:'ltt'});
         L.polyline([[28.50,-13.86],[28.62,-12.95]],{color:'#fff',weight:2,dashArray:'5 5'}).addTo(m).bindTooltip('≈ 100 km',{permanent:true,direction:'top',className:'ltt'});
         route(m,[[27.20,-13.30],[28.15,-14.25]],'mig','#e23149');route(m,[[23.75,-15.95],[27.70,-17.90]],'mig','#e23149');route(m,[[20.95,-17.05],[27.85,-15.55]],'mig','#ff5a6e');
         mark(m,[28.36,-14.05],'Fuerteventura','cy','right');mark(m,[28.00,-15.60],'Gran Canaria','cy','top');mark(m,[28.29,-16.62],'Tenerife','cy','left');
