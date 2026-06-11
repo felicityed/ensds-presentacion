@@ -43,9 +43,36 @@ http.createServer((req, res) => {
         return res.end('404 · No encontrado');
       }
       const ext = path.extname(filePath).toLowerCase();
+      const type = MIME[ext] || 'application/octet-stream';
       const cache = (ext === '.html') ? 'no-store, no-cache, must-revalidate' : 'public, max-age=86400';
+      const total = st.size;
+      const range = req.headers.range;
+
+      // Soporte de peticiones de rango (imprescindible para vídeo en iOS Safari)
+      if (range) {
+        const m = /bytes=(\d*)-(\d*)/.exec(range);
+        let start = m && m[1] !== '' ? parseInt(m[1], 10) : 0;
+        let end = m && m[2] !== '' ? parseInt(m[2], 10) : total - 1;
+        if (isNaN(start)) start = 0;
+        if (isNaN(end) || end >= total) end = total - 1;
+        if (start > end || start >= total) {
+          res.writeHead(416, { 'Content-Range': 'bytes */' + total });
+          return res.end();
+        }
+        res.writeHead(206, {
+          'Content-Type': type,
+          'Content-Range': 'bytes ' + start + '-' + end + '/' + total,
+          'Accept-Ranges': 'bytes',
+          'Content-Length': end - start + 1,
+          'Cache-Control': cache
+        });
+        return fs.createReadStream(filePath, { start: start, end: end }).pipe(res);
+      }
+
       res.writeHead(200, {
-        'Content-Type': MIME[ext] || 'application/octet-stream',
+        'Content-Type': type,
+        'Content-Length': total,
+        'Accept-Ranges': 'bytes',
         'Cache-Control': cache
       });
       fs.createReadStream(filePath).pipe(res);
